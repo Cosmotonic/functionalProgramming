@@ -1,0 +1,13 @@
+/Users/nh/Dropbox/Documents/Work/ITU/Course/KSFUPRO1KU-F2024/Lectures/Lec06/Vector/VectorExample/src/VectorSimple/bin/Debug/net8.0/VectorSimple.deps.json
+/Users/nh/Dropbox/Documents/Work/ITU/Course/KSFUPRO1KU-F2024/Lectures/Lec06/Vector/VectorExample/src/VectorSimple/bin/Debug/net8.0/VectorSimple.dll
+/Users/nh/Dropbox/Documents/Work/ITU/Course/KSFUPRO1KU-F2024/Lectures/Lec06/Vector/VectorExample/src/VectorSimple/bin/Debug/net8.0/VectorSimple.pdb
+/Users/nh/Dropbox/Documents/Work/ITU/Course/KSFUPRO1KU-F2024/Lectures/Lec06/Vector/VectorExample/src/VectorSimple/bin/Debug/net8.0/VectorSimple.xml
+/Users/nh/Dropbox/Documents/Work/ITU/Course/KSFUPRO1KU-F2024/Lectures/Lec06/Vector/VectorExample/src/VectorSimple/obj/Debug/net8.0/VectorSimple.fsproj.AssemblyReference.cache
+/Users/nh/Dropbox/Documents/Work/ITU/Course/KSFUPRO1KU-F2024/Lectures/Lec06/Vector/VectorExample/src/VectorSimple/obj/Debug/net8.0/VectorSimple.AssemblyInfoInputs.cache
+/Users/nh/Dropbox/Documents/Work/ITU/Course/KSFUPRO1KU-F2024/Lectures/Lec06/Vector/VectorExample/src/VectorSimple/obj/Debug/net8.0/VectorSimple.AssemblyInfo.fs
+/Users/nh/Dropbox/Documents/Work/ITU/Course/KSFUPRO1KU-F2024/Lectures/Lec06/Vector/VectorExample/src/VectorSimple/obj/Debug/net8.0/VectorSimple.fsproj.CoreCompileInputs.cache
+/Users/nh/Dropbox/Documents/Work/ITU/Course/KSFUPRO1KU-F2024/Lectures/Lec06/Vector/VectorExample/src/VectorSimple/obj/Debug/net8.0/VectorSimple.dll
+/Users/nh/Dropbox/Documents/Work/ITU/Course/KSFUPRO1KU-F2024/Lectures/Lec06/Vector/VectorExample/src/VectorSimple/obj/Debug/net8.0/refint/VectorSimple.dll
+/Users/nh/Dropbox/Documents/Work/ITU/Course/KSFUPRO1KU-F2024/Lectures/Lec06/Vector/VectorExample/src/VectorSimple/obj/Debug/net8.0/VectorSimple.xml
+/Users/nh/Dropbox/Documents/Work/ITU/Course/KSFUPRO1KU-F2024/Lectures/Lec06/Vector/VectorExample/src/VectorSimple/obj/Debug/net8.0/VectorSimple.pdb
+/Users/nh/Dropbox/Documents/Work/ITU/Course/KSFUPRO1KU-F2024/Lectures/Lec06/Vector/VectorExample/src/VectorSimple/obj/Debug/net8.0/ref/VectorSimple.dll

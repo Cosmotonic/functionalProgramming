@@ -1,0 +1,26 @@
+
+Lecture 2.  
+
+
+
+
+
+Lecture 1. Notes
+
+5*4! 
+
+if / match 
+javea / f#
+
+let rec fact n = 
+var recur factorial value = 
+
+expression, anything we do evaluates to a value 
+
+alt+return run current code in vs code 
+
+types (var declaration?) represents a finite set of values. (bool: 2, int: 64 bits of integers, )
+
+
+
+

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<linker>
+  <assembly fullname="Queue">
+    <resource name="FSharpSignatureData.Queue" action="remove"></resource>
+    <resource name="FSharpSignatureCompressedData.Queue" action="remove"></resource>
+    <resource name="FSharpSignatureDataB.Queue" action="remove"></resource>
+    <resource name="FSharpSignatureCompressedDataB.Queue" action="remove"></resource>
+    <resource name="FSharpOptimizationData.Queue" action="remove"></resource>
+    <resource name="FSharpOptimizationCompressedData.Queue" action="remove"></resource>
+    <resource name="FSharpOptimizationDataB.Queue" action="remove"></resource>
+    <resource name="FSharpOptimizationCompressedDataB.Queue" action="remove"></resource>
+    <resource name="FSharpOptimizationInfo.Queue" action="remove"></resource>
+    <resource name="FSharpSignatureInfo.Queue" action="remove"></resource>
+  </assembly>
+</linker>

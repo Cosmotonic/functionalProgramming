@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "WrCyLfvXUqGQaULdVGq0CwAIJAbs32ykspbanBTMJIIkILOuRBoocTNsJJVVmKfAoH5gW6l7T6w0IJGf+jDtlw==",
+  "success": true,
+  "projectFilePath": "/Users/nh/Dropbox/Documents/Work/ITU/Course/KSFUPRO1KU-F2024/Lectures/Lec06/Vector/VectorExample/src/VectorSimple/VectorSimple.fsproj",
+  "expectedPackageFiles": [
+    "/Users/nh/.nuget/packages/fsharp.core/8.0.200/fsharp.core.8.0.200.nupkg.sha512"
+  ],
+  "logs": []
+}

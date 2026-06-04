@@ -1,0 +1,13 @@
+/Users/nh/Dropbox/Documents/Work/ITU/Course/KSFUPRO1KU-F2024/Lectures/Lec06/Vector/VectorExample/src/VectorObj/obj/Debug/net8.0/VectorObj.fsproj.AssemblyReference.cache
+/Users/nh/Dropbox/Documents/Work/ITU/Course/KSFUPRO1KU-F2024/Lectures/Lec06/Vector/VectorExample/src/VectorObj/obj/Debug/net8.0/VectorObj.AssemblyInfoInputs.cache
+/Users/nh/Dropbox/Documents/Work/ITU/Course/KSFUPRO1KU-F2024/Lectures/Lec06/Vector/VectorExample/src/VectorObj/obj/Debug/net8.0/VectorObj.AssemblyInfo.fs
+/Users/nh/Dropbox/Documents/Work/ITU/Course/KSFUPRO1KU-F2024/Lectures/Lec06/Vector/VectorExample/src/VectorObj/obj/Debug/net8.0/VectorObj.fsproj.CoreCompileInputs.cache
+/Users/nh/Dropbox/Documents/Work/ITU/Course/KSFUPRO1KU-F2024/Lectures/Lec06/Vector/VectorExample/src/VectorObj/bin/Debug/net8.0/VectorObj.deps.json
+/Users/nh/Dropbox/Documents/Work/ITU/Course/KSFUPRO1KU-F2024/Lectures/Lec06/Vector/VectorExample/src/VectorObj/bin/Debug/net8.0/VectorObj.dll
+/Users/nh/Dropbox/Documents/Work/ITU/Course/KSFUPRO1KU-F2024/Lectures/Lec06/Vector/VectorExample/src/VectorObj/bin/Debug/net8.0/VectorObj.pdb
+/Users/nh/Dropbox/Documents/Work/ITU/Course/KSFUPRO1KU-F2024/Lectures/Lec06/Vector/VectorExample/src/VectorObj/bin/Debug/net8.0/VectorObj.xml
+/Users/nh/Dropbox/Documents/Work/ITU/Course/KSFUPRO1KU-F2024/Lectures/Lec06/Vector/VectorExample/src/VectorObj/obj/Debug/net8.0/VectorObj.dll
+/Users/nh/Dropbox/Documents/Work/ITU/Course/KSFUPRO1KU-F2024/Lectures/Lec06/Vector/VectorExample/src/VectorObj/obj/Debug/net8.0/refint/VectorObj.dll
+/Users/nh/Dropbox/Documents/Work/ITU/Course/KSFUPRO1KU-F2024/Lectures/Lec06/Vector/VectorExample/src/VectorObj/obj/Debug/net8.0/VectorObj.xml
+/Users/nh/Dropbox/Documents/Work/ITU/Course/KSFUPRO1KU-F2024/Lectures/Lec06/Vector/VectorExample/src/VectorObj/obj/Debug/net8.0/VectorObj.pdb
+/Users/nh/Dropbox/Documents/Work/ITU/Course/KSFUPRO1KU-F2024/Lectures/Lec06/Vector/VectorExample/src/VectorObj/obj/Debug/net8.0/ref/VectorObj.dll

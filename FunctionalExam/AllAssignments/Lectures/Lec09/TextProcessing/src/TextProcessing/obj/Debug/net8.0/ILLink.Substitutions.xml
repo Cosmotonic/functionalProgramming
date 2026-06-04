@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<linker>
+  <assembly fullname="TextProcessing">
+    <resource name="FSharpSignatureData.TextProcessing" action="remove"></resource>
+    <resource name="FSharpSignatureCompressedData.TextProcessing" action="remove"></resource>
+    <resource name="FSharpSignatureDataB.TextProcessing" action="remove"></resource>
+    <resource name="FSharpSignatureCompressedDataB.TextProcessing" action="remove"></resource>
+    <resource name="FSharpOptimizationData.TextProcessing" action="remove"></resource>
+    <resource name="FSharpOptimizationCompressedData.TextProcessing" action="remove"></resource>
+    <resource name="FSharpOptimizationDataB.TextProcessing" action="remove"></resource>
+    <resource name="FSharpOptimizationCompressedDataB.TextProcessing" action="remove"></resource>
+    <resource name="FSharpOptimizationInfo.TextProcessing" action="remove"></resource>
+    <resource name="FSharpSignatureInfo.TextProcessing" action="remove"></resource>
+  </assembly>
+</linker>
