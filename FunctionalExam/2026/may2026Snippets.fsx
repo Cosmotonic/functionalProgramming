@@ -9,30 +9,13 @@
 // *** QUESTION 1
 // * Question 1.1 
 // 1.1.1 - take function that returns N elements of a list. DONT USE LIBRARY FUNCTONIS. 
-let take ((n:int), (xs: 'a list)) : 'a list =
-    let rec aux acc xs =
-        match xs with
-        | [] -> acc
-        | x::tail ->
-            if List.length acc < n then aux (x::acc) tail
-            else aux acc tail
-    aux [] xs |> List.rev
-take (3,[1;2;4;5])
-
-let take ((n:int), (xs: 'a list)) : 'a list =
-    let rec aux n xs =
-        match n, xs with
-        | 0, _ -> []
-        | _, [] -> failwith "take: not enough elements."
-        | n, x::tail -> x :: aux (n-1) tail
-    aux n xs
-take (3,[1;2;4;5])
-
-let rec take_alternative ((n:int), (xs: 'a list)) : 'a list =
-    match n, xs with
+// return a list with only the n elements of the given list. 
+let rec take (n:int, xs:'a list) : 'a list = 
+    match n, xs with 
     | 0, _ -> []
-    | _, [] -> failwith "take: not enough elements."
-    | n, x::tail -> x :: take ((n-1), tail) 
+    | _, [] -> failwith "Take: not enough elements" 
+    | n, h::tail -> h :: take (n-1, tail)
+
 take (3,[1;2;4;5])
 
 
@@ -40,28 +23,14 @@ take (3,[1;2;4;5])
 
 
 // 1.1.2 partition ((<)5) [1;2;5;3;5;9;9;10] - separate the list in two lists that meets the predicat. (solve tail recursively )
-let partition (p:'a-> bool) (xs:'a list) : 'a list *'a list = 
-    let rec aux acc lst =
-        match lst with
-        | [] -> acc
-        | x::tail ->  if p x then ([x],[]) else ([],[x]) // tail recursive because the last we call is ourselves. 
-    aux ([],[]) xs  
+let rec partition (p:'a->bool) (xs:'a list) : 'a list * 'a list = 
+    match xs with
+    | [] -> ([], [])
+    | h::t -> 
+        let (higher, lower) = partition p t // de tolister 
+        if (p h) then (h::higher, lower) else (higher, h::lower)
 
-partition ((<) 5) [1;2;5;3;5;9;9;10] // evaluate to ([10;9;9],[5;3;5;2;1]). // 
-
-
-let partition (p:'a -> bool) (xs:'a list) : 'a list * 'a list = 
-    let rec aux acc lst =
-        match lst with
-        | [] -> acc
-        | x::tail ->
-            let (yes,no) = acc
-            if p x then aux (x::yes, no) tail
-            else aux (yes, x::no) tail
-    aux ([],[]) xs
-
-partition ((<) 5) [1;2;5;3;5;9;9;10]
-
+partition ((<)5) [1;2;5;3;5;9;9;10]
 // 1.1.3 partitionA - 
 // make it tail recursive - attempted on previous step. )
 
