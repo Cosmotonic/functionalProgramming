@@ -1,6 +1,7 @@
 
 type stack<'b> = list<'b>
-type mapStack<'a,'b> = MapStack of list<'a*stack<'b>>
+type mapStack<'a,'b> = 
+    MapStack of list<'a*stack<'b>>
 
 let ex1 = MapStack [('1',[3;1;1]); ('2',[1;3;1]); ('3',[1;1;3]);('4',[3;3;1]); ('5',[2;3;4]); ('6',[2;1;2])]
 
@@ -42,10 +43,50 @@ let remove (k:'a) (l:('a * 'b) list ) : ('a * 'b) list =
 
 remove 1 [(1, "v1"); (2, "v2"); (3, "v3"); (4, "v4") ] 
 
-let rec mapPush (k:'a) (v:'b) (m:mapStack<'a, 'b>) : mapStack<'a, 'b> when 'a : equality = 
-    match m with 
-    | MapStack [] ->  MapStack [(k, [v])]
-    | MapStack ((key, value)::rest)  -> 
+let rec mapPush (k:'a) (v:'b) (MapStack m:mapStack<'a, 'b>) : mapStack<'a, 'b> when 'a : equality = 
+    match m with
+    | [] ->  MapStack [(k, [v])]
+    | (key, values)::rest ->
+        if key = k then
+            MapStack ((key, v::values)::rest)
+        else
+            let (MapStack newRest) = mapPush k v (MapStack rest)
+            MapStack ((key, values)::newRest)
 
-    
-    
+let rec mapPop (k:'a)(MapStack m) : 'b * mapStack<'a, 'b> when 'a : equality = 
+    match m with 
+    | [] -> raise (System.Exception "Cant find key")
+    | (key, values)::rest ->
+                    if k = key then 
+                        match values with 
+                        | [] -> raise (System.Exception "cant pop empty stack")
+                        | h::t -> (h, MapStack ((key, t)::rest))
+                    else 
+                        let (h, MapStack newRest) = mapPop k ( MapStack rest) 
+                        (h, MapStack ((key, values)::newRest))
+mapPop '1' ex1
+
+
+// 1.3.1 
+let rec map (f:'a->'b->'c) (MapStack m):mapStack<'a,'c>=
+    match m with
+    |[] -> MapStack []
+    |(k,stack)::tail-> 
+        let newstack= List.map(fun v -> f k v) stack
+        let (MapStack rest) = map f (MapStack tail)
+        MapStack ((k,newstack)::rest)
+map (fun _ v-> v+1) ex1
+
+// 1.3.1 
+let rec map2 f (MapStack m)  = 
+    match m with 
+    | [] -> MapStack [] 
+    | (k,stack)::tail -> 
+                let newStack = stack |> List.map (fun x -> f k x) // |> List.map (fun x -> f k x) // 
+                let (MapStack rest) = map2 f (MapStack tail) 
+                MapStack ((k,newStack)::rest)
+
+map2 (fun _ v-> v+1) ex1
+
+
+let hey = MapStack [("Hey", ['H';'E';'Y']);("there", ['t';'h';'e';'r';'e'])]; 

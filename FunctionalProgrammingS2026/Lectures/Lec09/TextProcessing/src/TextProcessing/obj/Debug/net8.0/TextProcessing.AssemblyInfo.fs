@@ -10,7 +10,7 @@ open System.Reflection
 [<assembly: System.Reflection.AssemblyCompanyAttribute("TextProcessing")>]
 [<assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")>]
 [<assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")>]
-[<assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")>]
+[<assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9f4f126b0bc8a725ff339a8ceee87a397c72a256")>]
 [<assembly: System.Reflection.AssemblyProductAttribute("TextProcessing")>]
 [<assembly: System.Reflection.AssemblyTitleAttribute("TextProcessing")>]
 [<assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")>]

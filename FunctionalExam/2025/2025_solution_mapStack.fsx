@@ -130,7 +130,7 @@ let rec mapPop k m =
     | MapStack [] -> raise (System.Exception ("Can't find key"))
     | MapStack ((key, values)::rest) ->  
         if key = k then match values with
-                        | [] ->  raise (System.Exception ("Can’t pop empty stack"))
+                        | [] ->  raise (System.Exception ("Can't pop empty stack"))
                         | x::restValues -> (x, MapStack ((key, restValues) :: rest))
         else 
             let (v, MapStack newRest) = mapPop k (MapStack rest)  
