@@ -66,7 +66,6 @@ let rec mapPop (k:'a)(MapStack m) : 'b * mapStack<'a, 'b> when 'a : equality =
                         (h, MapStack ((key, values)::newRest))
 mapPop '1' ex1
 
-
 // 1.3.1 
 let rec map (f:'a->'b->'c) (MapStack m):mapStack<'a,'c>=
     match m with
@@ -89,4 +88,43 @@ let rec map2 f (MapStack m)  =
 map2 (fun _ v-> v+1) ex1
 
 
-let hey = MapStack [("Hey", ['H';'E';'Y']);("there", ['t';'h';'e';'r';'e'])]; 
+
+
+
+let rec map3 f (MapStack m)  = 
+    match m with 
+    | [] -> MapStack []
+    | (k,v)::tail -> 
+                let updatedStack = v |> List.map ( fun x -> f k x)
+                let (MapStack rest) = map3 f (MapStack tail) 
+                (MapStack ((k, updatedStack)::rest))
+
+
+let rec fold f e (MapStack m) : 'a = 
+    match m with 
+    | [] -> e
+    | (k,stack)::tail -> 
+            let word = stack |> List.fold (fun s v -> f s k v ) e
+            // let word = stack |> List.map (fun x -> f x) |> List.fold (fun s x ->  x + s) e 
+            fold f word (MapStack tail)
+
+fold (fun str _ v -> str + v.ToString()) "" ex2 
+
+
+let hey = ['H';'E';'Y']
+
+let folder lst = 
+    lst |> List.fold (fun s x -> s+string(x) ) ""
+
+folder hey 
+
+
+
+
+
+
+
+
+
+
+
