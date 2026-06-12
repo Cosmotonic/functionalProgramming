@@ -1,4 +1,5 @@
 
+// Question 1. 
 type stack<'b> = list<'b>
 type mapStack<'a,'b> = 
     MapStack of list<'a*stack<'b>>
@@ -88,9 +89,6 @@ let rec map2 f (MapStack m)  =
 map2 (fun _ v-> v+1) ex1
 
 
-
-
-
 let rec map3 f (MapStack m)  = 
     match m with 
     | [] -> MapStack []
@@ -117,14 +115,5 @@ let folder lst =
     lst |> List.fold (fun s x -> s+string(x) ) ""
 
 folder hey 
-
-
-
-
-
-
-
-
-
 
 
