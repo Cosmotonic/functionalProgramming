@@ -94,11 +94,26 @@ let rec fold (f:'a->TrashItem<'b>->'a) (e:'a) (tc:TrashCan<'b>) : 'a =
 
 fold (fun n _ -> n+1) 0 tcEx
 
-
 let sort (tc:TrashCan<'a>) :  TrashCan<'a>*TrashCan<'a>*TrashCan<'a> = 
-    
-    
+    let rec aux tc (paperTc, glassTc, otherTc) = 
+        match tc with 
+        | Empty -> (paperTc,  glassTc, otherTc)
+        | TrashItems (item,can)-> 
+                    match item with
+                    | Paper x -> aux can ((addItem item paperTc), glassTc, otherTc)
+                    | Glass x -> aux can (paperTc, (addItem item glassTc),  otherTc)
+                    | Other x -> aux can (paperTc, glassTc, (addItem item otherTc))
 
-    (paperTc, glassTc, otherTc )
+    aux tc (Empty,Empty, Empty) 
+    
+let (paperTc, glassTc, otherTc) = sort tcEx
 
-sort tcEx
+isSorted paperTc
+isSorted glassTc
+isSorted otherTc
+
+
+let filter (fnP:TrashItem<'a> -> bool) (tc:TrashCan<'a>) : TrashCan<'a> =
+    fold (fun acc item -> if fnP item then addItem item acc else acc) Empty tc
+
+filter isPaper tcEx
