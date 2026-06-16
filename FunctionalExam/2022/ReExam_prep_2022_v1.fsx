@@ -66,7 +66,6 @@ let rec forAll (fnP:TrashItem<'a>->bool) (tc:TrashCan<'a>) : bool =
 
 forAll isPaper tcEx
 
-
 let isSameCategory (item1:TrashItem<'a>) (item2:TrashItem<'b>) : bool = 
     match (item1, item2 )with 
     | (Paper x, Paper y )-> true
@@ -80,10 +79,11 @@ let isSorted (tc:TrashCan<'a>) : bool =
     match tc with 
     | Empty -> true 
     | TrashItems (item,can)-> 
-                match item with 
-                | Paper x -> if (forAll (isSameCategory item) can) then true else false 
-                | Glass x -> if (forAll (isSameCategory item) can) then true else false 
-                | Other x -> if (forAll (isSameCategory item) can) then true else false 
+                forAll (isSameCategory item) can  
+                // match item with 
+                // | Paper x -> if (forAll (isSameCategory item) can) then true else false 
+                // | Glass x -> if (forAll (isSameCategory item) can) then true else false 
+                // | Other x -> if (forAll (isSameCategory item) can) then true else false 
 
 isSorted tcEx1
 
@@ -94,10 +94,10 @@ let rec fold (f:'a->TrashItem<'b>->'a) (e:'a) (tc:TrashCan<'b>) : 'a =
 
 fold (fun n _ -> n+1) 0 tcEx
 
-let sort (tc:TrashCan<'a>) :  TrashCan<'a>*TrashCan<'a>*TrashCan<'a> = 
+let sort (tc:TrashCan<'a>) : TrashCan<'a>*TrashCan<'a>*TrashCan<'a> = 
     let rec aux tc (paperTc, glassTc, otherTc) = 
         match tc with 
-        | Empty -> (paperTc,  glassTc, otherTc)
+        | Empty -> (paperTc, glassTc, otherTc)
         | TrashItems (item,can)-> 
                     match item with
                     | Paper x -> aux can ((addItem item paperTc), glassTc, otherTc)
@@ -111,6 +111,17 @@ let (paperTc, glassTc, otherTc) = sort tcEx
 isSorted paperTc
 isSorted glassTc
 isSorted otherTc
+
+
+let sort1 (tc:TrashCan<'a>) : TrashCan<'a> * TrashCan<'a> * TrashCan<'a> = 
+    tc |> fold (fun (paperTc, glassTc, otherTc) item ->
+            match item with 
+            | Paper x -> (addItem item paperTc, glassTc, otherTc)
+            | Glass x -> (paperTc, addItem item glassTc, otherTc)
+            | Other x -> (paperTc, glassTc,addItem item otherTc)
+                ) (Empty, Empty, Empty)
+
+let (paperTc1, glassTc1, otherTc1) = sort1 tcEx
 
 
 let filter (fnP:TrashItem<'a> -> bool) (tc:TrashCan<'a>) : TrashCan<'a> =
