@@ -282,3 +282,66 @@ let largestDep1 (deps: Department list) : int =
     let largest = deps |> List.maxBy (fun dep -> dep.Employees |> List.length)  
     largest.Employees |> List.length 
 largestDep deps
+
+
+
+
+// practice with fold 
+// https://web.archive.org/web/20200630222351/http://sidburn.github.io:80/blog/2017/03/19/understanding-fold
+let mutable amountOfEvenNumbers = 0
+let mutable sumOfEvenNumbers    = 0
+for x in 1 .. 10 do
+    if x % 2 = 0 then
+        amountOfEvenNumbers <- amountOfEvenNumbers + 1
+        sumOfEvenNumbers    <- sumOfEvenNumbers + x
+
+amountOfEvenNumbers // 5
+sumOfEvenNumbers    // 30
+
+let folder (amount,sum) x =
+    if   x % 2 = 0
+    then (amount+1, sum+x)
+    else (amount, sum)
+
+let (amount, sum) = List.fold folder (0,0) [1..10]
+
+amount // 5
+sum    // 30
+
+let map'' f list =
+    let folder x acc =
+        let newElement = f x
+        newElement :: acc
+    List.foldBack folder list []
+
+map'' (fun x -> x * 2) [1..5] // [2;4;6;8;10]
+
+let map''' f list =
+    let folder x acc =
+        let newElement = f x
+        newElement :: acc
+    List.foldBack folder list []
+
+map''' (fun x -> x * 2) [1..5] // [2;4;6;8;10]
+
+let map'''' f list = 
+    List.fold (fun acc x -> (f x)::acc) [] list 
+map'''' (fun x -> x*2) [1..5]
+
+let redu lst = 
+    List.reduce lst
+redu (+) [1..4]
+
+
+let map''''' f list = 
+    List.foldBack (fun x acc -> (f x)::acc) list [] 
+map''''' (fun x -> x*2) [1..5]
+
+
+let tester f list = 
+    let SomeFunc acc x = 
+        let newVal = f x 
+        newVal :: acc
+    List.fold SomeFunc [] list  // SomeFun is the same as (fun x acc -> x::acc) but you can add any function really. 
+
+tester (fun x -> x*2) [1..2] 
