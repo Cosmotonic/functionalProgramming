@@ -202,13 +202,12 @@ let rec maxDepth (ft : FolderTree) : int =
 maxDepth disk
 
 
-
-
 // 2 
 type RoseTree<'T> =
     | Node of 'T * RoseTree<'T> list
     | Leaf of 'T
 type Employee = string * string // (Name, Title)
+
 
 let org =
     Node(("Hanne","CEO" ),
@@ -217,6 +216,50 @@ let org =
             Node(("Ulla","Developer"),[])]);
         Node(("Kirsten","CFO"),
             [Node(("Hans","Accountant"),[])])])
+let orgLeaf =
+    Node(("Hanne","CEO"),
+        [ Node(("Bob","CTO"),
+            [ Leaf(("Peter","Developer"))
+              Node(("Ulla","Developer"),[
+                Leaf ("kap", "dev")]) ])
+
+          Node(("Kirsten","CFO"),
+            [ Leaf(("Hans","Accountant")) ]) ])
+
+let rec countLeaves (rt:RoseTree<'a>) : int = 
+    match rt with 
+    | Node (_,rest) -> rest |> List.sumBy countLeaves // "vi giver selve funktionen til sumBy. som selv kan finde ud af at gøre (fun x -> x...)"
+    | Leaf l -> 1 
+
+countLeaves orgLeaf
+
+let rec numValues rt =
+    match rt with
+    | Node (_, children) -> 1 + List.sumBy numValues children
+    | Leaf _ -> 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 let org2 =
     Node(("Kurt","CEO"),
@@ -263,27 +306,22 @@ let rec numValues rt =
     | Node (_, children) -> 1 + List.sumBy numValues children
     | Leaf _ -> 1
 
+numValues org8
 
-let layers (rt:RoseTree<'a>) : int = 
-    let rec aux rt : int = 
-        match rt with 
-        | Node (_, []) -> 1 
-        | Node (_, rtList) -> let mappedLengths = rtList |> List.map (fun roset  -> aux roset+1) 
-                              List.max mappedLengths
-        | Leaf _ -> 1
-
-    aux rt
-
-layers org
+let rec layers (rt:RoseTree<'a>) : int = 
+    match rt with 
+    | Node (_,[] ) -> 1 
+    | Node (_, rtList) -> let listLengths =  rtList |> List.map (fun tree -> layers tree+1)
+                          List.max listLengths
+    | Leaf _ -> 1 
 layers org8
 layers (Leaf ("Kapper","Nyboss"))
+
 
 let largestDep1 (deps: Department list) : int = 
     let largest = deps |> List.maxBy (fun dep -> dep.Employees |> List.length)  
     largest.Employees |> List.length 
 largestDep deps
-
-
 
 
 // practice with fold 
@@ -332,11 +370,9 @@ let redu lst =
     List.reduce lst
 redu (+) [1..4]
 
-
 let map''''' f list = 
     List.foldBack (fun x acc -> (f x)::acc) list [] 
 map''''' (fun x -> x*2) [1..5]
-
 
 let tester f list = 
     let SomeFunc acc x = 
@@ -345,3 +381,8 @@ let tester f list =
     List.fold SomeFunc [] list  // SomeFun is the same as (fun x acc -> x::acc) but you can add any function really. 
 
 tester (fun x -> x*2) [1..2] 
+
+let rec aux (x:'a) (acc:'a) = 
+    acc+x 
+[1..2] |> List.fold aux 0   
+
