@@ -250,17 +250,6 @@ let rec numValues rt =
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 let org2 =
     Node(("Kurt","CEO"),
         [ Node(("Hanne","CFO"),

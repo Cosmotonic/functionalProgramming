@@ -72,21 +72,13 @@ let org2 =
                 [Node (("PIa", "Developer"),[])])])])
 
 
-lad os tage udgangspunkt i denne 
+let numValues (rt:RoseTree<'a>) : int = 
+    let rec aux rt =  
+        match rt with 
+        | Node (_, children ) ->  1 + List.sumBy aux children 
+    aux rt 
 
-
-
-let rec numValues rt =
-
-    match rt with
-
-    | Node (_, children) -> 1 + List.sumBy numValues children
-
-    | Leaf _ -> 1
-
-
-
-
+numValues org
 
 let rec layers (rt:RoseTree<'a>) : int =    
     match rt with 

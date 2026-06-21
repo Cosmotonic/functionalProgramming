@@ -1,15 +1,4 @@
 
-type stack<'b> = list<'b>
-
-type mapStack<'a,'b> = 
-    MapStack of list<'a*stack<'b>>
-
-let ex1 = MapStack [('1',[3;1;1]); ('2',[1;3;1]); ('3',[1;1;3]);('4',[3;3;1]); ('5',[2;3;4]); ('6',[2;1;2])]
-
-// 1.1.1 
-let ex2 = MapStack [("Hey", ['H';'E';'Y']);("there", ['t';'h';'e';'r';'e'])]; 
-
-
 type menneske<'a, 'b> = 'a * list<'b> 
 type family<'a,'b> = 
         Family of list<menneske<'a, 'b>>
