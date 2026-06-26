@@ -244,3 +244,39 @@ let catMapFast n =
                 (sum, cache'')
                 // Returnerer både værdi og opdateret cache.
     fst (cat n Map.empty)
+
+let mutable value = 10 
+// 4 
+let rec countIf p = function
+    [] -> 0
+    | lst -> 
+            let (x::xs) = lst
+            let count = countIf p xs
+            if p x then count + 1 else count
+
+countIf ((>)0)[-1;2;-4;5]
+
+
+let rec countIfA p lst acc =
+    match lst with 
+    | [] -> acc
+    | x::xs -> 
+            if p x then countIfA p xs (acc+1)
+            else  
+            countIfA p xs acc
+
+let lst = [-1;2;-4;5]
+countIfA ((>) 0) lst 0
+
+// 
+
+let maxList (xs:'a list) : 'a when 'a : comparison = 
+    let rec aux xs s = 
+        match xs with 
+        | [] -> s 
+        | h::t -> if h > s then aux t h 
+                    else aux t s  
+    aux xs xs.Head
+
+maxList ['a';'b';'d']
+

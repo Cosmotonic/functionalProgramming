@@ -113,15 +113,14 @@ average [3;3;3]
 
 let rec maxBy f xs =
     match xs with
-    | [] ->
-        failwith "maxBy: empty list"
+    | [] -> failwith "maxBy: empty list"
     | [x] -> x
     | h::t ->
         let bestRest = maxBy f t
         if f h >= f bestRest then h
         else bestRest
 
-maxBy ((+)1) [1..10]
+maxBy ((+) 1) [1..10]
 
 
 // Consider the F# function collect f xs of type (’a-> ’b list)-> ’a list-> ’b list.
