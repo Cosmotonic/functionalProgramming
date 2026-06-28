@@ -195,13 +195,12 @@ deposit exAccount01 DKK (13, 2, 2024) 42.1
 
 type Balances = Map<Currency, float>
 
-let getBalance (currency:'a) (balances:Map<'a, float>) = // : float when 'a : comparison = 
-    match currency with 
-    | DKK -> balances |> Map.filter (fun k v -> k = DKK) |> Map.fold (fun acc k v -> acc + v) 0.0
-    | EUR -> balances |> Map.filter (fun k v -> k = EUR) |> Map.fold (fun acc k v -> acc + v) 0.0
-    | USD -> balances |> Map.filter (fun k v -> k = USD) |> Map.fold (fun acc k v -> acc + v) 0.0
-        
-getBalance EUR ( Map [(DKK, 42.0);(USD, 43.25)])
+let getBalance (currency:'a) (balances:Map<'a, float>) : float when 'a : comparison = 
+    match balances |> Map.tryFind currency with 
+    | Some v -> v
+    | None -> 0.0
+
+getBalance USD ( Map [(DKK, 42.0);(USD, 43.25)])
 
 
 let addToBalance (balances:Map<'a,float>) ((currency:'a), (transType:TransactionType),(amount:float)) : Map<'a,float> = 
@@ -220,3 +219,35 @@ let getBalancesOfAccount (account:Account) : Map<Currency,float> =
     accountBal
 
 getBalancesOfAccount exAccount01;;
+
+
+
+// 4 
+
+let fizzBuzz (n:int) : string = 
+    if n % 5 = 0 && n % 3 = 0 then "FizzBuzz" 
+    else if n % 5 = 0 then "Buzz" 
+    else if n % 3 = 0 then "Fizz"
+    else sprintf "%s" (string n) 
+
+fizzBuzz 7
+
+let fizzBuzzSeq : string seq = 
+                    Seq.initInfinite (fun n -> fizzBuzz n )
+Seq.take 4 fizzBuzzSeq 
+
+let fizzBuzzSeqCache = Seq.cache fizzBuzzSeq
+let fizzBuzzSeq2 : (int * string) seq = 
+    let mapped = fizzBuzzSeqCache |> Seq.mapi (fun i x -> i, x) 
+    mapped |> Seq.filter (fun (i, x) -> x = "Fizz" || x = "Buzz" || x = "FizzBuzz")
+                
+Seq.take 4 fizzBuzzSeq2
+
+
+
+
+
+
+///////////////////////////
+/// 
+/// 
