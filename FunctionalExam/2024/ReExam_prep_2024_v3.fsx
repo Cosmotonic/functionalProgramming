@@ -148,3 +148,60 @@ let deposit (account:Account) (currency:Currency) ((day:int), (month:int), (year
 
 deposit exAccount01 DKK (13, 2, 2024) 42.1 
 
+type Balances = Map<Currency, float>
+
+let getBalance (currency:'a) (balances:Map<'a, float>) : float when 'a : comparison = 
+    match Map.tryFind currency balances with 
+    | Some value -> value 
+    | None  -> 0.0 
+
+getBalance USD (Map [(DKK, 42.0);(USD, 43.25)])
+getBalance DKK (Map [(DKK, 42.0);(USD, 43.25)])
+getBalance DKK (Map []);;
+
+
+let addToBalance (balances: Map<'a, float>) ((currency:'a), (transactionType:TransactionType), (amount:float)) : Map<'a, float> = 
+    let currentBalacnce = getBalance currency balances 
+    let newbalance = if transactionType = Deposit then currentBalacnce + amount else (currentBalacnce - amount)
+    balances.Add(currency, newbalance)
+
+let bal = addToBalance Map.empty (DKK, Deposit, 100.0);; 
+addToBalance bal (USD,Withdrawal, 100.0)
+
+let getBalancesOfAccount (account:Account) : Map<Currency, float> = 
+    let allTrans = account.transactions 
+    let folded = allTrans |> List.fold (fun acc x -> addToBalance acc (x.currency, x.transType,x.amount)) Map.empty
+    folded
+
+getBalancesOfAccount exAccount01
+
+let conversionRates =
+    Map [(USD, Map [(EUR, 0.93); (DKK, 6.94)]);
+         (EUR, Map [(USD, 1.07); (DKK, 7.46)]);
+         (DKK, Map [(USD, 0.14); (EUR, 0.13)])]
+
+let getConvRate (fromCurrency: 'a) (toCurrency:'b) (rates:Map<'a,Map<'b,'c>>) : 'c when 'a: comparison and 'b : comparison = 
+    match Map.tryFind fromCurrency rates with 
+    | Some innerTable -> 
+                    match Map.tryFind toCurrency innerTable with 
+                    | Some value -> value 
+                    | None -> failwith "Cannot find toCurrency"
+    | None -> failwith "Cannot find fromCurrency" 
+getConvRate USD DKK conversionRates 
+
+List.map (fun x -> if x <> 2 then x+1 else x) [1;2;3]         
+
+let convertFunds (account:Account) (fromCurrency: Currency) (toCurrency: Currency) (rates: Map<Currency, Map<Currency, float>>) : Account = 
+        let transactions = account.transactions 
+        let rate = getConvRate fromCurrency toCurrency rates
+        let newTrans = transactions |> List.map (fun x -> if x.currency = fromCurrency then
+                                                            mkTrans (x.transType, toCurrency, x.amount * rate, x.date) 
+                                                            else x)
+        {
+            owner = account.owner
+            number = account.number
+            transactions = newTrans}
+
+let exAccount03 = convertFunds exAccount01 USD EUR conversionRates
+
+
