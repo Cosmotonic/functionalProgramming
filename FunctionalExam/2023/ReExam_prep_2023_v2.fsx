@@ -89,13 +89,61 @@ printf "%s" (ppAlbum album1)
 
 let rec contentAlbum (album:Elem list) : int * int = 
     album |> List.fold (fun (albs, eles) elem ->
-                            match elem with 
-                            | PicElem _-> (albs, eles+1) 
-                            | AlbumElem (_,subAlbum) -> 
-                                    let (subAlb, subEle) = contentAlbum subAlbum
-                                    (albs + 1 + subAlb, eles+subEle)) (0, 0)
+        match elem with 
+        | PicElem _-> (albs, eles+1) 
+        | AlbumElem (_,subAlbum) -> 
+                    let (subAlb, subEle) = contentAlbum subAlbum
+                    (albs + 1 + subAlb, eles+subEle)) (0, 0)
 contentAlbum album1
 
 
-let countAlbum2 (album:Elem list) : string list =   
+let countAlbum2 (album:Elem list) : int * int = 
+    let rec aux (albs, eles) album = 
+       match album with 
+       | [] -> (albs, eles) 
+       | h::tail -> match h with 
+                    | PicElem _ -> aux (albs, eles+1) tail 
+                    | AlbumElem (_, subAlbum) -> 
+                        let (subAlb, subEle) = aux (1, 0) subAlbum
+                        aux (albs + subAlb, eles + subEle) tail 
+    aux (0,0) album 
+countAlbum2 album1
+
+type MultiStack<'a,'b> =
+    { listA: ('a*int) list; // 'a string
+      listB: ('b*int) list} // 'b nr 
+let exMS01 = 
+    {listA = [("Copenhagen",2); ("Aarhus",0)];
+     listB = [(4000,1)] }
+
+let exMS02 = 
+    {listA = [(100,2);(42,1)];
+     listB = [('Q',3); ('C',0);] }
+
+let mkMultiStack : MultiStack<'a,'b> = { listA =[]; listB = []}
+let exMS03 : MultiStack<int,int> = { listA = []; listB = [] }
+
+let size (ms:MultiStack<'a,'b>) : int = 
+    (ms.listA |> List.length) + (ms.listB |> List.length )
+
+size exMS01 // 3 
+size exMS03 // 0 
+
+let isEmpty (ms:MultiStack<'a,'b>) : bool = 
+    if size ms > 0 then true else false
+
+isEmpty exMS01 // true 
+isEmpty exMS03 // false
+
+let pushA (e:'a) (ms:MultiStack<'a,'b>) : MultiStack<'a,'b> = 
+    let stkA = (e, size ms)::ms.listA
+    {listA = stkA; listB = ms.listB}
+pushA 42 exMS03
+
+let pushB (e:'b) (ms:MultiStack<'a,'b>) : MultiStack<'a,'b> = 
+    let stkB = (e, size ms)::ms.listB
+    {listA = ms.listA;listB = stkB;}
+pushB 4640 exMS01 //  val it: MultiStack<string,int> = { listA = [("Copenhagen", 2); ("Aarhus", 0)] listB = [(4640, 3); (4000, 1)] }
+
+let pop (ms:MultiStack<'a,'b>) : ('a option * 'b option) * MultiStack<'a,'b> = 
     
